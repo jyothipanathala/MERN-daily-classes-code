@@ -1,0 +1,13 @@
+Database:
+  ->place where we can store data is called as data base.
+
+
+  Types of dat base:
+    1.structured Data:
+           ->sql,mysql,postgres,sql,sql server...etc
+
+    2.Semi structured data:
+          ->Semi structured data had no sql data bases
+          ->it follow the structure but not fixed schema.
+          ->NO SQl data base
+    3.Unstructured data:
