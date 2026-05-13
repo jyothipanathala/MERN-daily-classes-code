@@ -9,5 +9,224 @@ Database:
     2.Semi structured data:
           ->Semi structured data had no sql data bases
           ->it follow the structure but not fixed schema.
-          ->NO SQl data base
+          ->NO SQl data base:it doesn't fit for traditional data base(sql)
+              ->
+          1.Mongodb-  document format
+          2.cassandra-column family 
+          3.HBase-    column family
+          4.Neo4j-    nodes
+          5.RAik-     key value pair
     3.Unstructured data:
+       MongoDB:
+          ->Mongodb is the  Nosql to store the data in document format
+
+
+       Database:
+        syntsx: use datbasename
+
+
+        Collection:
+           ->collection is the group of documents in Mongodb
+           syntax  - db.creatrCollection('collectionName)
+
+
+         Document:
+                ->It contain(JSON/BSON) group of fields  .
+
+
+                ->Insert document:
+                1.syntax - db.collectionName.insertOne(document)
+                2.syntax-
+
+
+
+                Retrive Documents /data;
+                   1.findone()  ->used to retrieve one documents.
+                   syntax-
+                       db.collectionName.fineOne({filter condition},{projection query})
+
+
+                       projections:
+                          -.projections are used to retrieve required fields
+                          ->to display field values ->(-id:1)
+                          ->if dont't want to display values ->0 (field)
+
+
+
+                     update document fields:
+                        1.updateOne()
+                            ->it is used to update single document at a time.
+                               ->syntax:  db.collectionName.updateOne({filter condition},{updated query})
+
+
+                        2.updateMany()     
+                            ->it is used to update multiple Documents at a time.
+                               ->syntax:  db.collectionName.updateMany({filter condition},{updated query})
+
+
+                               updateoperators:
+                                   1.$set:used to insert new upadte like  add or change any value
+                                   2.$unset: used to  remove field or values or name
+                                   3.$inc: used to any increament or decrement
+                                   4.$rename
+                                   5.$pop:we can't remoe values by using name.
+                                   6.$push
+                                   7.$pull
+
+  Relationa; operators:
+     we can use in upadate first parameter
+
+
+     Delete operatos:
+     1.deleteOne()
+     2.deleteMany()
+     3.remove()
+           ->  used to delete entire document.
+
+           syntax-
+                 db.collectionName.deleteOne({filter condition})
+                 db.collectionName.deleteMany({filter condition})
+                 db.collectionName.remove({filter condition})
+
+
+
+    Relational operators:
+           1. $eq  ->equal to.
+        
+           2. $neq  ->not equal
+           3. $gt ->greatet than
+           4. $gte ->greater then equal
+           5.$lte -> lessthan equal
+
+           logical operators:
+             1.$end
+             2.$or 
+             3.$not
+   parametirized functions:
+              1.count()   |
+              2.sort()
+              3.skip()
+              4.limit()
+
+               ->we can not use in findone
+               syntax -
+                   db.collectionName.find().count()
+                      Q. wQT to display count of the students who's attendance >=75 and <=90.
+                   db.collectionName.find().sort({field:value})
+                   db.collectionName.find().skip(number)
+                   db.collectionName.find().limit(number)
+
+                   Aggregate functions:
+                   ------------------   
+                          ->used to perform operations.
+
+-> For more details to select query:
+
+                          db.Employee_Details.aggregate(
+  {
+    $match:{
+      $and:[{department:"Marketing"},{job_title:"Data Analyst"}]
+    }
+  }
+   
+)
+
+
+WAQ to display maximum salry in each department.
+
+db.Employee_Details.aggregate(
+  {
+    $group:{
+      _id:"$department",
+      maxSalaryInEachDept:{$max:"$salary"}
+    }
+  
+  }
+)
+WAQ to display max,min , total salry in each department
+
+
+
+
+->if order id .it display customer details of order
+  db.orders.aggregate(
+  {
+    $lookup:{
+      from:"customers",
+      localField:"customer_id",
+      foreignField:"_id",
+      as:"customers"
+      
+    }
+  }
+)
+
+sol:
+     ---------------------------orderDetails
+_id: 101,
+  order_id: 'ORD101',
+  amount: 4723.46,
+  customer_id: 23,
+  date: '2024-10-06',
+  customers: [------------------- customers
+    {
+      _id: 23,
+      name: 'Bryan May',
+      email: 'jeffrey25@butler.com',
+      phoneNo: '(495)371-4133x075'
+    }
+  ]
+  Waq ro displt customer name and count of the orders
+
+
+
+
+  
+
+
+
+
+->based on customer id get the order details
+
+db.customers.aggregate(
+  {
+    $lookup:{
+      from:"orders",
+      localField:"_id",
+      foreignField:"customer_id",
+      as:"orderDetails"
+      
+    }
+  }
+)
+
+
+
+
+
+
+sol:
+{-------------------------------------customers
+  _id: 1,
+  name: 'Christina Gibson',
+  email: 'kevin97@hotmail.com',
+  phoneNo: '(425)957-9832',
+  orderDetails: ----------------------------------orderDetails
+    {
+      _id: 103,
+      order_id: 'ORD103',
+      amount: 2151.35,
+      customer_id: 1,
+      date: '2024-10-13'
+    }
+}
+
+Index:
+  ----------
+        1.createIndex({fileName:1})
+        ->1 ascrending,0 descending
+
+         syntax:
+             db.collectionName.createIndex({filterName:1})
+             db.collectionName:getIndexes()
+             db.collectionNamedropIndex(indexName)
