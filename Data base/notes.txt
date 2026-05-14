@@ -27,7 +27,7 @@ Database:
 
         Collection:
            ->collection is the group of documents in Mongodb
-           syntax  - db.creatrCollection('collectionName)
+           syntax  - db.creatrCollection('collectionName')
 
 
          Document:
