@@ -8,7 +8,7 @@ const studentRouter=require("./routes/studentRouter");
 const collegeRouter=require("./routes/collegeRouter")
 
 app.use("/students",studentRouter);
-app.use("/college",collegeRouter)
+app.use("/colleges",collegeRouter)
 
 app.listen(PORT,()=>{
   console.log("Server running on port",PORT);

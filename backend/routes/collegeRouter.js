@@ -1,7 +1,12 @@
-const addCollege=require("../controller/collegeController")
+const {addCollege,getAllColleges,deleteCollege,getCollegeBasedOnId,updateCollegeDetails,updateEmail}=require("../controller/collegeController")
 const express=require("express");
+const { getMaxListeners } = require("../model/StudentModel");
 const router=express.Router()
 
-router.post("/add-college",addCollege)
-
+router.post("/add-college",addCollege);
+router.get("/get-colleges",getAllColleges);
+router.delete("/delete-college/:id",deleteCollege)
+router.get("/get-college/:id",getCollegeBasedOnId)
+router.put("/update-college/:id",updateCollegeDetails)
+router.patch("/update-email/:email",updateEmail)
 module.exports=router;
